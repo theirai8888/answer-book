@@ -14,6 +14,7 @@
   }
   *{box-sizing:border-box}
   [hidden]{display:none!important}   /* Artifact 平台會補這條，放在自己的網站就要自己寫，不然 hidden 的遮罩會一直蓋著 */
+  a[href^="tel"]{color:inherit;text-decoration:none;pointer-events:none}   /* 保險：iPhone 把 0800-000-168 自動變電話連結時，不要加底線、不要變色、點了不撥號 */
   html,body{height:100%}
   body{margin:0;background:var(--night);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;
     display:grid;place-items:center;overflow:hidden}
@@ -112,7 +113,7 @@
 
 <div class="phone" id="phone">
   <div class="moon" aria-hidden="true"></div>
-  <div class="ver" aria-hidden="true">版本 1011-2026</div>
+  <div class="ver" aria-hidden="true">版本 1011-2041</div>
 
   <section class="view on" id="dial" aria-label="撥號">
     <div class="hook">先在心裡想一個問題</div>
