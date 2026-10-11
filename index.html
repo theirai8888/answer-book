@@ -39,6 +39,7 @@
   .hook{margin-top:max(30px,calc(var(--h)*7));font-size:clamp(17px,calc(var(--h)*2.4),21px);font-weight:700;letter-spacing:.06em}
   .number{margin-top:clamp(14px,calc(var(--h)*3),28px);min-height:clamp(46px,calc(var(--h)*7),60px);font-size:clamp(32px,calc(var(--h)*5.2),44px);font-weight:300;
     letter-spacing:.03em;font-variant-numeric:tabular-nums;text-align:center}
+  .number::before{content:attr(data-n)}   /* 號碼用 CSS 產生的文字顯示，不是網頁裡的真文字：Google／Chrome 的 iPhone 版不理 telephone=no，仍會把真文字的 0800-000-168 加底線（KK 2026-10-11） */
   .hint{min-height:20px;font-size:14px;color:var(--mute);letter-spacing:.04em}
   .pad{display:grid;grid-template-columns:repeat(3,clamp(60px,calc(var(--h)*9.4),76px));gap:clamp(12px,calc(var(--h)*2.2),20px) clamp(20px,calc(var(--h)*3.2),28px);margin-top:clamp(16px,calc(var(--h)*3.5),34px)}
   .key{aspect-ratio:1;border-radius:50%;background:var(--key);border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);
@@ -113,7 +114,7 @@
 
 <div class="phone" id="phone">
   <div class="moon" aria-hidden="true"></div>
-  <div class="ver" aria-hidden="true">版本 1011-2041</div>
+  <div class="ver" aria-hidden="true">版本 1011-2048</div>
 
   <section class="view on" id="dial" aria-label="撥號">
     <div class="hook">先在心裡想一個問題</div>
@@ -177,7 +178,7 @@ KEYS.forEach(([d, l]) => {
 $("del").onclick = () => { digits = digits.slice(0, -1); renderNum(); };
 const fmt = d => [d.slice(0,4), d.slice(4,7), d.slice(7,10)].filter(Boolean).join("-");
 function renderNum(){
-  numEl.textContent = fmt(digits) || " ";
+  numEl.setAttribute("aria-label", fmt(digits)); numEl.dataset.n = fmt(digits) || " ";
   hint.textContent = digits === DEFAULT_NUM ? "答案之書專線" : (digits ? "新增號碼" : "");
 }
 renderNum();
